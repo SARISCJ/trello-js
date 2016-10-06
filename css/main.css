@@ -112,63 +112,222 @@ i span:before {
   display: flex;
 }
 
-#task-container {
-	margin-left: 40px;
-	margin-top: 40px;
+.page-top {
+  background: #0079BF;
+  width: 100%;
+  position: absolute;
+  height: 50px;
+  top: 0;
+  left: 0;
 }
 
-#boton-task {
-	padding: 10px;
-	background-color: #5E8DA9;
-	width: 240px;
-	height: 40px;
-	border-radius: 4px;
-	color: #FFF;
+.heart {
+  position: absolute;
+  margin: auto;
+  left: 35px;
+  right: 0;
+  margin: 5px;
 }
 
-.ocultar {
-	display: none;
+.tooltip {
+  display: inline-block;
+  border-radius: 3px;
+  transition-duration: 0.5s;
 }
 
-#boton-task:hover {
-	background-color: #006BA9;
+.tooltip:hover i {
+  color: #EB5A46;
+  transition-duration: 0.5s;
 }
 
-.boton {
-	margin: 5px 0px;
-	width: 80px;
-	height: 37px;
-	padding: 4px;
-	background-color: #5EB64B;
-	border: none;
-	border-radius: 4px;
-	color: #FFF;
+.tooltip i {
+  transition-duration: 0.5s;
+  text-align: center;
+  line-height: 45px;
+  width: 40px;
+  height: 50px;
+  color: white;
+  font-size: 16pt;
 }
 
-.caja {
-	display: inline-block;
-	padding: 6px;
-	background-color: #E2E4E6;
-	width: 240px;
-	border-radius: 4px;
+i:hover + span {
+  display: block;
 }
 
-.agregarTexto {
-	background-color: #D4D6D8;
-	width: 228px;
-	border-radius: 4px;
-	border: none;
-	height: 32px;
-	margin-bottom: 3px;
+i span {
+  display: ;
+  position: absolute;
+  top: 7px;
+  left: 53px;
+  width: 130px;
+  line-height: 30px;
+  padding: 0px;
+  z-index: 100;
+  font-size: 14pt;
+  font-weight: bold;
+  font-family: 'Helvetica', sans-serif;
+  background: rgba(255, 255, 255, .3);
+  color: #fff;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 
-.titulo {
- 	padding-left: 10px;
- 	margin-bottom: 11px;
- 	font-size: 16px;
- }
- 
- .vinculo {
- 	padding-left: 10px;
- 	font-size: 16px;
- }
+i span:before {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid rgba(255, 255, 255, .3);
+  left: -8px;
+  top: 7px;
+}
+
+.header-logo {
+  background-image: url(https://d78fikflryjgj.cloudfront.net/images/50b4ebc64391dc394a38e73aed57f0e2/header-logo.png);
+  background-repeat: no-repeat;
+  background-size: 80px 30px;
+  height: 30px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 10px;
+  width: 80px;
+  margin: auto;
+}
+
+.logo {
+  background-image: url(https://d78fikflryjgj.cloudfront.net/images/50b4ebc64391dc394a38e73aed57f0e2/header-logo.png);
+  background-repeat: no-repeat;
+  background-size: 145px 47px ;
+  left: 0;
+  top: -1px;
+  margin: auto;
+  position: absolute;
+}
+
+#contenedorPadre {
+  margin-top: 40px;
+}
+
+form {
+  display: inline-block;
+}
+
+.lista{
+  padding: 10px 40px;
+  background-color: rgba(0,0,0,0.4);
+  display: inline-block;
+  margin-left: 13px;
+}
+
+.lista:hover{
+  background-color: rgba(0,0,0,0.8);
+}
+
+.formulario{
+  background-color: #E2E4E6;
+  padding: 4px;
+  border-radius: 5px;
+  margin-left: 3px;
+  vertical-align: top;
+
+}
+
+.button:hover{
+  background-color: #57A641;
+}
+
+.button {
+  background-color: #61BD4F;
+  padding: 10px 20px;
+  margin-top: 10px;
+  box-shadow: 0px 2px 2px 0px rgba(0,0,0,0.75);
+}
+
+.formulario, .lista {
+  margin-bottom: 5px;
+}
+
+.lista, .button {
+  border: none;
+  color: white;
+  font-size: 1em;
+  border-radius: 5px;
+}
+
+.none{
+  display: none;
+}
+
+.formulario input{
+  box-shadow: rgba(0, 0, 0, 0.14902) 0px 1px 8px inset;
+  background-color: rgba(0, 0, 0, 0.0470588);
+  padding: 10px;
+  border-radius: 5px;
+  border-color: rgb(170, 170, 170);
+  font-size: 1em;
+  display: block;
+  vertical-align: top;
+}
+
+.close{
+  float: none;
+  font-size: 1em;
+  margin: 2px 10px;
+}
+
+.padding {
+  padding: 10px 40px 10px 20px;
+}
+
+.negrita {
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.grey a{
+  color: #B3B4B5;
+}
+
+.grey:hover{
+  background-color: #CDD2D4;
+  text-decoration: underline;
+}
+
+.grey:hover a{
+  color: black;
+}
+
+.white {
+  background-color: white;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.padre {
+  display: inline-block;
+  height: auto;
+  vertical-align: top;
+}
+
+.textArea{
+  border-radius: 5px;
+  font-size: 1em;
+  display: block;
+}
+
+
+.mensajes {
+  padding: 5px;
+  background-color: white;
+  margin-top: 10px;
+}
+
+.o-auto {
+  overflow: auto;
+}
