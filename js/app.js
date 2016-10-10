@@ -1,92 +1,135 @@
-window.addEventListener("load", function(){
-  var contenedorPadre= document.getElementById("contenedorPadre");
-  var padre = document.getElementById("padre");
-  var lista = document.getElementById("lista");
-  var formulario = document.getElementById("formulario");
-  var button = document.getElementById("boton");
-  var div = document.getElementById("div");
-  var contador= 1;
+;(function() {
+
+  window.addEventListener("load", function(){
+    var contenedorPadre= document.getElementById("contenedorPadre");
+    var papa = document.getElementById("papa");
+    var añadir = document.getElementById("añadir");
+    var form = document.getElementById("form");
+    var button = document.getElementById("boton");
+    var div = document.getElementById("div");
+    var contador= 1;
+        
+    div.addEventListener("click", function() {
+      agregar(form, div);
+      añadir.focus();
+    });
+
+    button.addEventListener("click", function(e){
+      e.preventDefault();
+      var texto = "<a> Añadir una tarjeta...</a>";
+      var contenedorHermano = document.createElement("div");
+      contenedorHermano.classList.add("papa");
+      var padreTemporal = form.parentNode;
+
+      contenedorPadre.appendChild(contenedorHermano);
+      contenedorHermano.appendChild(form);
+      contenedorHermano.appendChild(div);
+
+      padreTemporal.remove();
+
+      var contenedor = document.createElement("div");
+      contenedor.classList.add("form");;
+      contenedor.classList.add("inline-block");
+      contenedorPadre.insertBefore(contenedor, contenedorPadre.lastElementChild);
       
-  div.addEventListener("click", function() {
-    agregar(formulario, div);
-    lista.focus();
-  });
+      contenedor.addEventListener("dragenter", function(){
+        this.classList.add("auto");
+      });
 
-  button.addEventListener("click", function(e){
-    e.preventDefault();
-    var texto = "<a>Añadir una tarjeta...</a>";
-    var conedorHermano = document.createElement("div");
-    conedorHermano.classList.add("padre");
+      contenedor.addEventListener("dragover", function(e){
+        this.classList.remove("auto");
+        e.preventDefault();
+      });
+      
+      contenedor.addEventListener("drop", function(e){
+        this.classList.remove("auto");
+        var mensajeMovido= e.dataTransfer.getData("text");
+        var element= document.getElementById(mensajeMovido);
+        this.insertBefore(element, this.firstElementChild.nextElementSibling);
+      }, true);
 
-    var padreTemporal = formulario.parentNode;
+      agregar(form, div);
 
-    contenedorPadre.appendChild(conedorHermano);
-    conedorHermano.appendChild(formulario);
-    conedorHermano.appendChild(div);
+      crear("div", añadir.value, contenedor, "titulo");
+      crear("div", texto, contenedor, "subTitulo");
 
-    padreTemporal.remove();
+      var select = document.querySelectorAll(".subTitulo");
 
-    var contenedor = document.createElement("div");
-    contenedor.classList.add("formulario");
-    contenedor.classList.add("width");
-    contenedor.classList.add("inline-block");
-    contenedorPadre.insertBefore(contenedor, contenedorPadre.lastElementChild);
-    
-    agregar(formulario, div);
-
-    crear("div", lista.value, contenedor, "negrita");
-    crear("div", texto, contenedor, "grey");
-
-    var select = document.querySelectorAll(".grey");
-
-    for(var i=0; i<select.length; i++){
-      select[i].addEventListener("click", function(){
+      select[select.length-1].addEventListener("click", function(){
         this.classList.add("none");
-        crearFormulario("form", contenedor, "formulario", this);
+        crearform("form", contenedor, "form", this);
+      });
+
+        añadir.value="";
+      });
+
+    var cerrar = document.getElementById("cerrar");
+    cerrar.addEventListener("click", function(e) {
+      e.preventDefault();
+      agregar(form, div);
+    });
+
+    function crearform(form, papa, clase, select){
+      var formula = document.createElement(form);
+      formula.classList.add(clase);
+      papa.appendChild(formula);
+
+      crear("textarea", "", formula, "textArea");
+      crear("button", "Guardar", formula, "button");
+
+      formula.lastElementChild.addEventListener("click", function(e){
+        e.preventDefault();
+        select.classList.remove("none");
+
+        var menTexto = document.createElement("div");
+        menTexto.id= "mensaje" + contador;
+        menTexto.draggable= true;
+        menTexto.innerHTML=formula.firstElementChild.value;
+        formula.classList.add("none");
+        menTexto.classList.add("texto");
+        papa.insertBefore(menTexto, select);
+        contador++;
+
+         menTexto.addEventListener("dragstart", function(e){
+              e.dataTransfer.setData("text", this.id);
+              this.classList.add("dragstar");
+          });
+          menTexto.addEventListener("dragenter", function(){
+              this.classList.add("dragenter");
+          });
+          menTexto.addEventListener("dragleave", function(){
+              this.classList.remove("dragenter")
+              this.classList.remove("dragover");
+          });
+          menTexto.addEventListener("dragover", function(e){
+              e.preventDefault();
+              this.classList.add("dragover");
+          });
+          menTexto.addEventListener("drop", function(e){
+              this.classList.add("animated", "flash", "bounce");
+              this.classList.remove("dragenter");
+              this.classList.remove("dragover");
+              var contenedorMensaje= e.dataTransfer.getData("text");
+              var element= document.getElementById(contenedorMensaje);
+              this.parentElement.insertBefore(element, this.nextElementSibling);
+          }, true);
+          menTexto.addEventListener("dragend", function(){
+              this.classList.remove("dragstar");           
+          });
       });
     }
 
-    lista.value="";
+    function crear(div, contenido,papa, clase){
+      var titulo = document.createElement(div);
+      titulo.innerHTML = contenido;
+      titulo.classList.add(pd);
+      titulo.classList.add(clase);
+      papa.appendChild(titulo);
+    }
+
+    function agregar(form, div){
+      form.classList.toggle("none");
+      div.classList.toggle("none");
+    }
   });
-
-  var close = document.getElementById("close");
-  close.addEventListener("click", function(e) {
-    e.preventDefault();
-    agregar(formulario, div);
-  });
-
-  function crearFormulario(formulario, padre, clase1, select){
-    var formula = document.createElement(formulario);
-    formula.classList.add(clase1);
-    padre.appendChild(formula);
-
-    crear("textarea", "", formula, "textArea");
-    crear("button", "Guardar", formula, "button");
-
-    formula.lastElementChild.addEventListener("click", function(e){
-      e.preventDefault();
-      select.classList.remove("none");
-
-      var mensajes = document.createElement("div");
-      mensajes.ID= "mensaje" + contador;
-      mensajes.innerHTML=formula.firstElementChild.value;
-      formula.classList.add("none");
-      mensajes.classList.add("mensajes");
-      padre.insertBefore(mensajes, select);
-      contador++;
-    });
-  }
-
-  function crear(div, contenido,padre, clase1){
-    var titulo = document.createElement(div);
-    titulo.innerHTML = contenido;
-    titulo.classList.add("padding");
-    titulo.classList.add(clase1);
-    padre.appendChild(titulo);
-  }
-
-  function agregar(formulario, div){
-    formulario.classList.toggle("none");
-    div.classList.toggle("none");
-  }
-});
+})();
