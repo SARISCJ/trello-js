@@ -1,6 +1,6 @@
 * {
-	box-sizing: border-box;
-	font-family: "Lobster Two";
+  box-sizing: border-box;
+  font-family: "Lobster Two";
 }
 
 body {
@@ -98,10 +98,10 @@ i span:before {
   background-image: url(https://d78fikflryjgj.cloudfront.net/images/50b4ebc64391dc394a38e73aed57f0e2/header-logo.png);
   background-repeat: no-repeat;
   background-size: 145px 47px ;
-	left: 0;
-	top: -1px;
-	margin: auto;
-	position: absolute;
+  left: 0;
+  top: -1px;
+  margin: auto;
+  position: absolute;
 }
 
 .labels {
